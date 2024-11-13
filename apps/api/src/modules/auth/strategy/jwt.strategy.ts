@@ -6,6 +6,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UsersService } from '~/modules/users/users.service';
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
 import TokenService from '../token.service';
+import { UserResponseMapper } from '~/mappers/responses/UserResponseMapper';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -34,7 +35,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     if (!user?.isActive()) {
       throw new UnauthorizedException('User not found');
     }
-    delete user.password;
-    return user;
+    return new UserResponseMapper().map(user);
   }
 }

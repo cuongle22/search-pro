@@ -65,8 +65,6 @@ export default class AuthService {
     const tokenData = await this.signJwtToken(user);
     await this.tokenService.blacklistPreviousToken(user.id);
     await this.tokenService.toInuse(user.id, tokenData.accessToken);
-
-    delete user.password;
     return tokenData;
   }
 

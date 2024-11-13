@@ -22,6 +22,7 @@ import { StoreResponseDto } from '~/shares/dtos/store-response.dto';
 import { UserResponseDto } from '~/shares/dtos/user-response.dto';
 import { JwtGuard } from '../auth/guard';
 import { StoresService } from './stores.service';
+import { RolesGuard } from '~/decorators/role-guard.decorator';
 
 @ApiTags('stores')
 @Controller('stores')
@@ -68,6 +69,7 @@ export class StoresController {
   }
 
   @Delete(':id')
+  @RolesGuard('ADMIN')
   @ApiOperation({ summary: 'Inactive a store' })
   @ApiResponse({ status: 200 })
   async softDelete(@Param('id') id: string): Promise<void> {
