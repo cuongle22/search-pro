@@ -1,4 +1,9 @@
-import { EntityManager, RequiredEntityData } from '@mikro-orm/core';
+import {
+  AutoPath,
+  EntityManager,
+  FilterQuery,
+  RequiredEntityData,
+} from '@mikro-orm/core';
 import { Injectable } from '@nestjs/common';
 import { StoreEntity } from '~/entities';
 import { StoreStatus } from '~/shares/consts/enums';
@@ -6,10 +11,34 @@ import { StoreUpdatingDto } from '~/shares/dtos';
 
 @Injectable()
 export class StoresService {
+  public defaultPopulate: AutoPath<StoreEntity, any> = [
+    'locations',
+    'owners',
+  ] as never[];
   constructor(private readonly em: EntityManager) {}
 
-  async findAll(): Promise<StoreEntity[]> {
-    return this.em.find(StoreEntity, {});
+  private getPopulates(populate?: string[]) {
+    if (populate) {
+      return populate as never[];
+    }
+    return this.defaultPopulate as never[];
+  }
+
+  async findAll(populate?: string[]): Promise<StoreEntity[]> {
+    return this.em.find(
+      StoreEntity,
+      {},
+      { populate: this.getPopulates(populate) },
+    );
+  }
+
+  async findByCondition(
+    condition: FilterQuery<StoreEntity>,
+    populate?: string[],
+  ): Promise<StoreEntity[]> {
+    return this.em.find(StoreEntity, condition, {
+      populate: this.getPopulates(populate),
+    });
   }
 
   async create(

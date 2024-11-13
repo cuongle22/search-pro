@@ -1,26 +1,27 @@
 import {
+  Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   Put,
-  Delete,
-  Body,
-  Param,
   UseGuards,
 } from '@nestjs/common';
 import {
-  ApiTags,
+  ApiBearerAuth,
   ApiOperation,
   ApiResponse,
-  ApiBearerAuth,
+  ApiTags,
 } from '@nestjs/swagger';
-import { StoresService } from './stores.service';
-import { StoreEntity } from '~/entities';
-import { StoreCreationDto, StoreUpdatingDto } from '~/shares/dtos';
-import { JwtGuard } from '../auth/guard';
 import { CurrentUser } from '~/decorators';
-import { UserResponseDto } from '~/shares/dtos/user-response.dto';
 import { StoreCreationEntityMapper } from '~/mappers/entities/StoreCreationEntityMapper';
+import { StoreResponseMapper } from '~/mappers/responses/StoreResponseMapper';
+import { StoreCreationDto, StoreUpdatingDto } from '~/shares/dtos';
+import { StoreResponseDto } from '~/shares/dtos/store-response.dto';
+import { UserResponseDto } from '~/shares/dtos/user-response.dto';
+import { JwtGuard } from '../auth/guard';
+import { StoresService } from './stores.service';
 
 @ApiTags('stores')
 @Controller('stores')
@@ -31,32 +32,39 @@ export class StoresController {
 
   @Get()
   @ApiOperation({ summary: 'List all stores' })
-  @ApiResponse({ status: 200, type: [StoreEntity] })
-  async findAll(): Promise<StoreEntity[]> {
-    return this.storesService.findAll();
+  @ApiResponse({ status: 200, type: [StoreResponseDto] })
+  async findAll(
+    @CurrentUser() user: UserResponseDto,
+  ): Promise<StoreResponseDto[]> {
+    const stores = await this.storesService.findByCondition({
+      owners: [user.id],
+    });
+    return new StoreResponseMapper().mapArray(stores);
   }
 
   @Post()
   @ApiOperation({ summary: 'Create a new store' })
-  @ApiResponse({ status: 201, type: StoreEntity })
+  @ApiResponse({ status: 201, type: StoreResponseDto })
   async create(
     @CurrentUser() user: UserResponseDto,
-    @Body() createStoreDto: StoreCreationDto,
-  ): Promise<StoreEntity> {
-    const creationData = new StoreCreationEntityMapper().map(createStoreDto, {
+    @Body() storeCreationDto: StoreCreationDto,
+  ): Promise<StoreResponseDto> {
+    const creationData = new StoreCreationEntityMapper().map(storeCreationDto, {
       owner: user.id,
     });
-    return this.storesService.create(creationData);
+    const store = await this.storesService.create(creationData);
+    return new StoreResponseMapper().map(store);
   }
 
   @Put(':id')
   @ApiOperation({ summary: 'Update a store' })
-  @ApiResponse({ status: 200, type: StoreEntity })
+  @ApiResponse({ status: 200, type: StoreResponseDto })
   async update(
     @Param('id') id: string,
     @Body() updateStoreDto: StoreUpdatingDto,
-  ): Promise<StoreEntity> {
-    return this.storesService.update(id, updateStoreDto);
+  ): Promise<StoreResponseDto> {
+    const store = await this.storesService.update(id, updateStoreDto);
+    return new StoreResponseMapper().map(store);
   }
 
   @Delete(':id')
