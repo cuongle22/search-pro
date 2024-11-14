@@ -6,7 +6,9 @@ export default class TokenService {
   private ttl: number = 3600;
 
   constructor() {
-    this.redis = new Redis(String(process.env.REDIS_CONNECTION));
+    this.redis = new Redis(
+      String(process.env.REDIS_CONNECTION || 'redis://localhost:6379'),
+    );
   }
 
   async toBlacklist(token: string, ttl: number = this.ttl) {

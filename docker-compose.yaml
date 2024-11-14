@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   db:
+    container_name: search_pro_db
     image: postgres
     restart: always
     environment:
@@ -16,7 +17,7 @@ services:
     networks:
       - search-pro-network
   redis:
-    container_name: redis
+    container_name: search_pro_redis
     image: redis/redis-stack:latest
     ports:
       - "${REDIS_SERVER_PORT:-6379}:6379"
@@ -29,6 +30,7 @@ services:
     networks:
       - search-pro-network
   api:
+    container_name: search_pro_api
     build: ./apps/api
     environment:
       - PORT=5000
@@ -41,7 +43,7 @@ services:
       - DATABASE_SSL=false
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - REDIS_CONNECTION=${REDIS_CONNECTION:-redis://redis:6379}
+      - REDIS_CONNECTION=${REDIS_CONNECTION:-redis://search_pro_redis:6379}
     depends_on:
       - db
       - redis
