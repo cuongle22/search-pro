@@ -11,7 +11,7 @@ export class MinStoreDto {
   })
   id!: string;
 
-  @ApiProperty({ required: true, example: 'ADMIN' })
+  @ApiProperty({ required: true, example: 'STORE_OWNER' })
   name!: string;
 }
 

@@ -1,14 +1,14 @@
 [
   {
     "role": "SUPER_ADMIN",
-    "description": "Super Admin"
+    "description": "Super Admin for the whole application"
   },
   {
-    "role": "ADMIN",
-    "description": "Admin"
+    "role": "STORE_OWNER",
+    "description": "Store owner who manages the store's quotes"
   },
   {
-    "role": "USER",
-    "description": "User"
+    "role": "APP_USER",
+    "description": "Application User who will use the mobile application"
   }
 ]

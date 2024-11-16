@@ -28,7 +28,7 @@ export enum QuoteStatus {
 }
 
 export enum UserRole {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
   SUPER_ADMIN = 'SUPER_ADMIN',
+  STORE_OWNER = 'STORE_OWNER',
+  APP_USER = 'APP_USER',
 }

@@ -8,7 +8,7 @@ export class MinOwnerDto {
   })
   id!: string;
 
-  @ApiProperty({ required: true, example: 'ADMIN' })
+  @ApiProperty({ required: true, example: 'STORE_OWNER' })
   userName!: string;
 
   @ApiProperty({ required: true, example: 'admin@mail.com' })

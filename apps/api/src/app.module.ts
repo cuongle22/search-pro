@@ -3,17 +3,17 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './modules/auth/auth.module';
-import { OrmModule } from './modules/orm/orm.module';
-import { StoresModule } from './modules/stores/stores.module';
-import { UsersModule } from './modules/users/users.module';
+import { UserModule } from './modules/admin/user/user.module';
+import { OrmModule } from './modules/common/orm/orm.module';
+import { StoreModule } from './modules/store/store.module';
+import { UserModule as AppUserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
     OrmModule,
-    AuthModule,
-    UsersModule,
-    StoresModule,
+    UserModule,
+    AppUserModule,
+    StoreModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [AppController],

@@ -1,6 +1,6 @@
 import { Entity, Enum, ManyToOne, Property } from '@mikro-orm/core';
 import { LocationStatus } from '~/shares/consts/enums';
-import { CountryEntity, StoreEntity } from '.';
+import { GeoRefEntity, StoreEntity } from '.';
 import { BaseEntity } from './BaseEntity';
 
 @Entity({ tableName: 'locations' })
@@ -11,17 +11,8 @@ export class LocationEntity extends BaseEntity<LocationEntity> {
   @Property({ length: 1000 })
   address!: string;
 
-  @Property({ length: 100, nullable: true })
-  city?: string;
-
-  @Property({ length: 100, nullable: true })
-  state?: string;
-
-  @ManyToOne(() => CountryEntity, { nullable: true })
-  country?: CountryEntity;
-
-  @Property({ length: 25, nullable: true })
-  zipCode?: string;
+  @ManyToOne(() => GeoRefEntity, { nullable: true })
+  geoRef?: GeoRefEntity;
 
   @Property({ length: 100, nullable: true })
   openTime?: string;

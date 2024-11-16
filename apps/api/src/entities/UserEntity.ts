@@ -20,6 +20,11 @@ export class UserEntity extends BaseEntity<UserEntity> {
   @Unique()
   userName!: string;
 
+  @ApiProperty({ maxLength: 255 })
+  @Property({ length: 255 })
+  @Unique()
+  description?: string;
+
   @ApiProperty({ required: false, maxLength: 100 })
   @Property({ length: 100, nullable: true })
   firstName?: string;
@@ -54,7 +59,7 @@ export class UserEntity extends BaseEntity<UserEntity> {
 
   @ApiProperty({ required: false })
   @Enum({ items: () => UserStatus, nullable: false })
-  status?: UserStatus = UserStatus.PENDING;
+  status?: UserStatus = UserStatus.ACTIVE;
 
   public getFullName() {
     return `${this.firstName} ${this.lastName}`;

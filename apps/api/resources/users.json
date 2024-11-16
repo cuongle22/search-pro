@@ -2,6 +2,7 @@
   {
     "id": "9da8b809-efdf-43ff-8ff5-03b364021fb6",
     "userName": "superadmin",
+    "description": "This role is to manage the application (manage stores, roles, permissions, etc...)",
     "firstName": "Super",
     "lastName": "Admin",
     "email": "superadmin@searchpro.com",
@@ -12,24 +13,26 @@
   },
   {
     "id": "9da8b809-efdf-43ff-8ff5-03b364021fb7",
-    "userName": "admin",
-    "firstName": "Admin",
-    "lastName": "Admin",
-    "email": "admin@searchpro.com",
-    "password": "admin",
+    "userName": "storeowner",
+    "description": "This role is the admin of store who is currently taking care of store's quotes",
+    "firstName": "Store",
+    "lastName": "Owner",
+    "email": "storeowner@searchpro.com",
+    "password": "storeowner",
     "emailVerified": true,
-    "role": "ADMIN",
+    "role": "STORE_OWNER",
     "status": "ACTIVE"
   },
   {
     "id": "9da8b809-efdf-43ff-8ff5-03b364021fb8",
     "userName": "user",
-    "firstName": "User",
+    "description": "This role is for application users who will register and quote for products",
+    "firstName": "App",
     "lastName": "User",
-    "email": "user@searchpro.com",
-    "password": "user",
+    "email": "appuser@searchpro.com",
+    "password": "appuser",
     "emailVerified": true,
-    "role": "USER",
+    "role": "APP_USER",
     "status": "ACTIVE"
   }
 ]

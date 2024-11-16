@@ -2,8 +2,9 @@ import type { EntityManager } from '@mikro-orm/postgresql';
 import { Seeder } from '@mikro-orm/seeder';
 import { RoleSeeder } from './RoleSeeder';
 import { UserSeeder } from './UserSeeder';
+import { GeoRefSeeder } from './GeoRefSeeder';
 
-const seeds = [RoleSeeder, UserSeeder];
+const seeds = [RoleSeeder, UserSeeder, GeoRefSeeder];
 
 export class MultipleSeeder extends Seeder {
   async run(en: EntityManager): Promise<void> {

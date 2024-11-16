@@ -8,7 +8,7 @@ export class RoleEntity {
   id: string = uuidv4();
 
   @Enum({ items: () => UserRole, nullable: false })
-  role: UserRole = UserRole.USER;
+  role: UserRole = UserRole.APP_USER;
 
   @Property({ length: 1000, nullable: true })
   description?: string;
