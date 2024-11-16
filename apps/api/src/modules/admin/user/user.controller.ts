@@ -14,35 +14,20 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Request } from 'express';
-import { UserResponseMapper } from '~/mappers/responses/UserResponseMapper';
-import { UserCreationDto, UserLoginDto } from '../../../shares/dtos';
+import { UserLoginDto } from '../../../shares/dtos';
 import { UserLoginResponseDto } from '../../../shares/dtos/user-login-response.dto';
-import { UserResponseDto } from '../../../shares/dtos/user-response.dto';
-import UserService from './user.service';
 import { JwtGuard } from '../../common/auth/guard/jwt.guard';
 import TokenService from '../../common/auth/token.service';
+import UserService from './user.service';
+import { RolesGuard } from '~/decorators/role-guard.decorator';
 
 @ApiTags('Admin Users')
 @Controller('admin/users')
 export class UserController {
   constructor(
-    private readonly authService: UserService,
+    private readonly userService: UserService,
     private readonly tokenService: TokenService,
   ) {}
-
-  @Post('register')
-  @ApiOperation({ summary: 'User registration' })
-  @ApiResponse({
-    status: 201,
-    description: 'User created',
-    type: UserResponseDto,
-  })
-  async register(
-    @Body() userCreationDto: UserCreationDto,
-  ): Promise<UserResponseDto> {
-    const user = await this.authService.register(userCreationDto);
-    return new UserResponseMapper().map(user);
-  }
 
   @Post('login')
   @HttpCode(200)
@@ -55,10 +40,11 @@ export class UserController {
   async login(
     @Body() userLoginDto: UserLoginDto,
   ): Promise<UserLoginResponseDto> {
-    return this.authService.login(userLoginDto);
+    return this.userService.login(userLoginDto);
   }
 
   @UseGuards(JwtGuard)
+  @RolesGuard('SUPER_ADMIN')
   @Post('logout')
   @HttpCode(200)
   @ApiBearerAuth()

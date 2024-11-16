@@ -14,10 +14,10 @@ export class UserResponseMapper extends BaseMapper<
       firstName: source.firstName ?? '',
       lastName: source.lastName ?? '',
       role: {
-        id: source.role.id,
-        value: source.role.role,
+        id: source?.role.id,
+        value: source?.role.role,
       },
-      stores: source.stores.map((store) => ({
+      stores: source?.stores?.map((store) => ({
         id: store.id,
         value: store.name,
       })),

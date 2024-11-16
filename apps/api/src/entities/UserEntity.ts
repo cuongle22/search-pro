@@ -8,7 +8,7 @@ import {
   Unique,
 } from '@mikro-orm/core';
 import { IsEmail } from 'class-validator';
-import { UserStatus } from '~/shares/consts/enums';
+import { UserRole, UserStatus } from '~/shares/consts/enums';
 import { RoleEntity, StoreEntity } from '.';
 import { BaseEntity } from './BaseEntity';
 import { ApiProperty } from '@nestjs/swagger';
@@ -67,5 +67,17 @@ export class UserEntity extends BaseEntity<UserEntity> {
 
   public isActive() {
     return !!this.emailVerified && this.status === UserStatus.ACTIVE;
+  }
+
+  public isSuperAdmin() {
+    return this.role.role === UserRole.SUPER_ADMIN;
+  }
+
+  public isAppUser() {
+    return this.role.role === UserRole.APP_USER;
+  }
+
+  public isStoreOwner() {
+    return this.role.role === UserRole.STORE_OWNER;
   }
 }
