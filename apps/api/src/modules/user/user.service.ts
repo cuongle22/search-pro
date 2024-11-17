@@ -4,9 +4,9 @@ import { ConflictException, GoneException, Injectable } from '@nestjs/common';
 import * as argon from 'argon2';
 import { RoleEntity, UserEntity } from '~/entities';
 import { UserResponseMapper } from '~/mappers/responses/UserResponseMapper';
-import { UserRole, UserStatus } from '~/shares/consts/enums';
-import { UserCreationDto, UserLoginDto } from '~/shares/dtos';
-import TokenService from '../common/auth/token.service';
+import { UserRole, UserStatus } from '~/share/consts/enums';
+import { UserCreationDto, UserLoginDto } from '~/share/dtos';
+import TokenService from '../share/auth/token.service';
 
 @Injectable()
 export class UserService {

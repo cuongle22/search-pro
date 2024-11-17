@@ -7,7 +7,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { JwtPayload } from '~/modules/common/auth/interfaces/jwt-payload.interface';
+import { JwtPayload } from '~/modules/share/auth/interfaces/jwt-payload.interface';
 import { ROLES_KEY } from './role.decorator';
 
 @Injectable()

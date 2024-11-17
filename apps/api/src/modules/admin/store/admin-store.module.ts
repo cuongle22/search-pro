@@ -5,7 +5,7 @@ import { AdminStoreController } from './admin-store.controller';
 import { AdminStoreService } from './admin-store.service';
 import { AdminUserModule } from '../user/admin-user.module';
 import AdminUserService from '../user/admin-user.service';
-import TokenService from '~/modules/common/auth/token.service';
+import TokenService from '~/modules/share/auth/token.service';
 
 @Module({
   imports: [AdminUserModule],

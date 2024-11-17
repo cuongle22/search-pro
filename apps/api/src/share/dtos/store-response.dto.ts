@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { StoreStatus } from '~/shares/consts/enums';
+import { StoreStatus } from '~/share/consts/enums';
 
 export class MinOwnerDto {
   @ApiProperty({

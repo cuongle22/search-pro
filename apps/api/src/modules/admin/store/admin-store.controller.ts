@@ -20,18 +20,18 @@ import { CurrentUser } from '~/decorators';
 import { RolesGuard } from '~/decorators/role-guard.decorator';
 import { StoreCreationEntityMapper } from '~/mappers/entities/StoreCreationEntityMapper';
 import { StoreResponseMapper } from '~/mappers/responses/StoreResponseMapper';
-import { JwtGuard } from '~/modules/common/auth/guard';
+import { JwtGuard } from '~/modules/share/auth/guard';
 import {
   StoreCreationDto,
   StoreOwnerCreationDto,
   StoreUpdatingDto,
-} from '~/shares/dtos';
-import { StoreResponseDto } from '~/shares/dtos/store-response.dto';
-import { UserResponseDto } from '~/shares/dtos/user-response.dto';
+} from '~/share/dtos';
+import { StoreResponseDto } from '~/share/dtos/store-response.dto';
+import { UserResponseDto } from '~/share/dtos/user-response.dto';
 import AdminUserService from '../user/admin-user.service';
 import { AdminStoreService } from './admin-store.service';
 
-@ApiTags('System')
+@ApiTags('System - Stores')
 @Controller('admin/stores')
 @RolesGuard('SUPER_ADMIN')
 @UseGuards(JwtGuard)

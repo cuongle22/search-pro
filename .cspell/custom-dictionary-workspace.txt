@@ -2,6 +2,8 @@ autoincrement
 consts
 Coty
 dtos
+Georef
+georefs
 Millis
 stusps
 superadmin

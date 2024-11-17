@@ -6,8 +6,8 @@ import {
 } from '@mikro-orm/core';
 import { Injectable } from '@nestjs/common';
 import { RoleEntity, StoreEntity, UserEntity } from '~/entities';
-import { StoreStatus, UserRole, UserStatus } from '~/shares/consts/enums';
-import { StoreOwnerCreationDto } from '~/shares/dtos';
+import { StoreStatus, UserRole, UserStatus } from '~/share/consts/enums';
+import { StoreOwnerCreationDto } from '~/share/dtos';
 import * as argon from 'argon2';
 
 @Injectable()

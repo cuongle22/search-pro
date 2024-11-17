@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserRole } from '~/shares/consts/enums';
-import { MinDto } from '~/shares/dtos/min.dto';
+import { UserRole } from '~/share/consts/enums';
+import { MinDto } from '~/share/dtos/min.dto';
 
 export class MinRoleDto extends MinDto<UserRole> {}
 

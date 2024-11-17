@@ -1,8 +1,8 @@
-import { StoreCreationDto } from '~/shares/dtos';
+import { StoreCreationDto } from '~/share/dtos';
 import { CreateEntityMapper } from '../base/CreateEntityMapper';
 import { StoreEntity } from '~/entities';
 import { RequiredEntityData } from '@mikro-orm/core';
-import { StoreStatus } from '~/shares/consts/enums';
+import { StoreStatus } from '~/share/consts/enums';
 
 interface StoreCreationOptions {
   owner: string;

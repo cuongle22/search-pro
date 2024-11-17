@@ -5,16 +5,14 @@ import {
   RequiredEntityData,
 } from '@mikro-orm/core';
 import { Injectable } from '@nestjs/common';
-import { RoleEntity, StoreEntity, UserEntity } from '~/entities';
-import { StoreStatus, UserRole, UserStatus } from '~/shares/consts/enums';
-import { StoreOwnerCreationDto } from '~/shares/dtos';
-import * as argon from 'argon2';
+import { LocationEntity } from '~/entities';
+import { LocationStatus } from '~/share/consts/enums';
 
 @Injectable()
 export class AdminLocationService {
-  public defaultPopulate: AutoPath<StoreEntity, any> = [
-    'locations',
-    'owners',
+  public defaultPopulate: AutoPath<LocationEntity, any> = [
+    'store',
+    'geoRef',
   ] as never[];
   constructor(private readonly em: EntityManager) {}
 
@@ -27,72 +25,50 @@ export class AdminLocationService {
 
   async findById(id: string, populate?: string[]) {
     return await this.em.findOne(
-      StoreEntity,
+      LocationEntity,
       { id },
       { populate: this.getPopulates(populate) },
     );
   }
 
-  async findAll(populate?: string[]): Promise<StoreEntity[]> {
+  async findAll(populate?: string[]): Promise<LocationEntity[]> {
     return this.em.find(
-      StoreEntity,
+      LocationEntity,
       {},
       { populate: this.getPopulates(populate) },
     );
   }
 
   async findByCondition(
-    condition: FilterQuery<StoreEntity>,
+    condition: FilterQuery<LocationEntity>,
     populate?: string[],
-  ): Promise<StoreEntity[]> {
-    return this.em.find(StoreEntity, condition, {
+  ): Promise<LocationEntity[]> {
+    return this.em.find(LocationEntity, condition, {
       populate: this.getPopulates(populate),
     });
   }
 
   async create(
-    storeData: RequiredEntityData<StoreEntity>,
-  ): Promise<StoreEntity> {
-    const store = this.em.create(StoreEntity, storeData);
-    await this.em.persistAndFlush(store);
-    return store;
+    locationData: RequiredEntityData<LocationEntity>,
+  ): Promise<LocationEntity> {
+    const location = this.em.create(LocationEntity, locationData);
+    await this.em.persistAndFlush(location);
+    return location;
   }
 
   async update(
     id: string,
-    updateStoreDto: Partial<StoreEntity>,
-  ): Promise<StoreEntity> {
-    const store = await this.em.findOneOrFail(StoreEntity, id);
-    store.assign(updateStoreDto);
-    await this.em.persistAndFlush(store);
-    return store;
+    updateLocationDto: Partial<LocationEntity>,
+  ): Promise<LocationEntity> {
+    const location = await this.em.findOneOrFail(LocationEntity, id);
+    location.assign(updateLocationDto);
+    await this.em.persistAndFlush(location);
+    return location;
   }
 
   async softDelete(id: string): Promise<void> {
-    const store = await this.em.findOneOrFail(StoreEntity, id);
-    store.status = StoreStatus.INACTIVE;
-    await this.em.persistAndFlush(store);
-  }
-
-  async createOwner(
-    store: StoreEntity,
-    storeOwnerDto: StoreOwnerCreationDto,
-  ): Promise<StoreEntity> {
-    const roleAppUser = await this.em.findOneOrFail(RoleEntity, {
-      role: UserRole.STORE_OWNER,
-    });
-    const password = await argon.hash(new Date().toUTCString());
-    const owner = this.em.create(UserEntity, {
-      ...storeOwnerDto,
-      status: storeOwnerDto.isActive ? UserStatus.ACTIVE : UserStatus.INACTIVE,
-      userName: storeOwnerDto.email,
-      role: roleAppUser.id,
-      password,
-      emailVerified: true,
-    });
-    store.owners.add(owner);
-
-    await this.em.persistAndFlush(store);
-    return store;
+    const location = await this.em.findOneOrFail(LocationEntity, id);
+    location.status = LocationStatus.INACTIVE;
+    await this.em.persistAndFlush(location);
   }
 }

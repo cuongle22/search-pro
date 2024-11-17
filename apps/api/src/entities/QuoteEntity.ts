@@ -5,7 +5,7 @@ import {
   ManyToOne,
   OneToMany,
 } from '@mikro-orm/core';
-import { QuoteStatus } from '~/shares/consts/enums';
+import { QuoteStatus } from '~/share/consts/enums';
 import {
   CommentEntity,
   ContactEntity,

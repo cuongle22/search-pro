@@ -6,8 +6,8 @@ import {
 } from '@mikro-orm/core';
 import { Injectable } from '@nestjs/common';
 import { StoreEntity } from '~/entities';
-import { StoreStatus } from '~/shares/consts/enums';
-import { StoreUpdatingDto } from '~/shares/dtos';
+import { StoreStatus } from '~/share/consts/enums';
+import { StoreUpdatingDto } from '~/share/dtos';
 
 @Injectable()
 export class StoreService {

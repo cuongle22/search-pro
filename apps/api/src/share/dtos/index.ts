@@ -4,3 +4,6 @@ export * from './user-creation.dto';
 export * from './store-creation.dto';
 export * from './store-updating.dto';
 export * from './store-owner-creation.dto';
+export * from './store-location-response.dto';
+export * from './geo-ref-filter.dto';
+export * from './geo-ref-response.dto';

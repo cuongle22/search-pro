@@ -20,12 +20,12 @@ import {
   UserCreationDto,
   UserLoginDto,
   UserLoginResponseDto,
-} from '~/shares/dtos';
-import { UserResponseDto } from '../../shares/dtos/user-response.dto';
-import { JwtGuard } from '../common/auth/guard/jwt.guard';
+} from '~/share/dtos';
+import { UserResponseDto } from '../../share/dtos/user-response.dto';
+import { JwtGuard } from '../share/auth/guard/jwt.guard';
 import { UserService } from './user.service';
 import { RolesGuard } from '~/decorators/role-guard.decorator';
-import TokenService from '../common/auth/token.service';
+import TokenService from '../share/auth/token.service';
 import { Request } from 'express';
 
 @ApiTags('App Users')

@@ -6,7 +6,7 @@ import {
   OneToMany,
   Property,
 } from '@mikro-orm/core';
-import { StoreStatus } from '~/shares/consts/enums';
+import { StoreStatus } from '~/share/consts/enums';
 import { BaseEntity } from './BaseEntity';
 import { UserEntity, LocationEntity } from '.';
 

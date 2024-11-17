@@ -3,8 +3,8 @@ import { GoneException, Injectable } from '@nestjs/common';
 import * as argon from 'argon2';
 import { UserEntity } from '~/entities';
 import { UserResponseMapper } from '~/mappers/responses/UserResponseMapper';
-import { UserLoginDto } from '../../../shares/dtos';
-import TokenService from '../../common/auth/token.service';
+import { UserLoginDto, UserLoginResponseDto } from '../../../share/dtos';
+import TokenService from '../../share/auth/token.service';
 
 @Injectable()
 export default class AdminUserService {
@@ -13,7 +13,7 @@ export default class AdminUserService {
     private readonly tokenService: TokenService,
   ) {}
 
-  async login(userLoginDto: UserLoginDto) {
+  async login(userLoginDto: UserLoginDto): Promise<UserLoginResponseDto> {
     const user = await this.em.findOne(
       UserEntity,
       {

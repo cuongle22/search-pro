@@ -2,7 +2,7 @@ import type { EntityManager } from '@mikro-orm/core';
 import roleData from '../resources/roles.json';
 import { BaseSeeder } from './BaseSeeder';
 import { RoleEntity } from '../src/entities/RoleEntity';
-import { UserRole } from '../src/shares/consts/enums'; // Ensure the path is correct
+import { UserRole } from '../src/share/consts/enums'; // Ensure the path is correct
 
 export class RoleSeeder extends BaseSeeder {
   async run(em: EntityManager): Promise<void> {

@@ -1,6 +1,6 @@
 import { StoreEntity } from '~/entities';
-import { StoreStatus } from '~/shares/consts/enums';
-import { StoreResponseDto } from '~/shares/dtos/store-response.dto';
+import { StoreStatus } from '~/share/consts/enums';
+import { StoreResponseDto } from '~/share/dtos/store-response.dto';
 import { BaseMapper } from '../base/BaseMapper';
 
 export class StoreResponseMapper extends BaseMapper<

@@ -14,14 +14,14 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Request } from 'express';
-import { UserLoginDto } from '../../../shares/dtos';
-import { UserLoginResponseDto } from '../../../shares/dtos/user-login-response.dto';
-import { JwtGuard } from '../../common/auth/guard/jwt.guard';
-import TokenService from '../../common/auth/token.service';
+import { UserLoginDto } from '../../../share/dtos';
+import { UserLoginResponseDto } from '../../../share/dtos/user-login-response.dto';
+import { JwtGuard } from '../../share/auth/guard/jwt.guard';
+import TokenService from '../../share/auth/token.service';
 import AdminUserService from './admin-user.service';
 import { RolesGuard } from '~/decorators/role-guard.decorator';
 
-@ApiTags('System')
+@ApiTags('System - Users')
 @Controller('admin/users')
 export class AdminUserController {
   constructor(

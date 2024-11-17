@@ -17,10 +17,10 @@ import {
 import { CurrentUser } from '~/decorators';
 import { StoreCreationEntityMapper } from '~/mappers/entities/StoreCreationEntityMapper';
 import { StoreResponseMapper } from '~/mappers/responses/StoreResponseMapper';
-import { StoreCreationDto, StoreUpdatingDto } from '~/shares/dtos';
-import { StoreResponseDto } from '~/shares/dtos/store-response.dto';
-import { UserResponseDto } from '~/shares/dtos/user-response.dto';
-import { JwtGuard } from '../common/auth/guard';
+import { StoreCreationDto, StoreUpdatingDto } from '~/share/dtos';
+import { StoreResponseDto } from '~/share/dtos/store-response.dto';
+import { UserResponseDto } from '~/share/dtos/user-response.dto';
+import { JwtGuard } from '../share/auth/guard';
 import { StoreService } from './store.service';
 import { RolesGuard } from '~/decorators/role-guard.decorator';
 
