@@ -15,7 +15,7 @@ export class StoreCreationEntityMapper extends CreateEntityMapper<
 > {
   map(
     source: StoreCreationDto,
-    options: StoreCreationOptions,
+    options?: StoreCreationOptions,
   ): RequiredEntityData<StoreEntity> {
     return {
       name: source.name,
@@ -26,8 +26,8 @@ export class StoreCreationEntityMapper extends CreateEntityMapper<
       website: source.website,
       status: StoreStatus.ACTIVE,
       locations: [],
-      owners: [options.owner],
-      createdBy: options.owner,
+      owners: options ? [options.owner] : [],
+      createdBy: options?.owner,
     };
   }
 }

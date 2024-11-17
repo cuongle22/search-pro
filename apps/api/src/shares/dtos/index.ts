@@ -3,3 +3,4 @@ export * from './user-login-response.dto';
 export * from './user-creation.dto';
 export * from './store-creation.dto';
 export * from './store-updating.dto';
+export * from './store-owner-creation.dto';

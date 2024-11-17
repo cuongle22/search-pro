@@ -24,9 +24,10 @@ import { JwtGuard } from '../common/auth/guard';
 import { StoreService } from './store.service';
 import { RolesGuard } from '~/decorators/role-guard.decorator';
 
-@ApiTags('stores')
+@ApiTags('Store Owners')
 @Controller('stores')
 @UseGuards(JwtGuard)
+@RolesGuard('STORE_OWNER')
 @ApiBearerAuth()
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
@@ -50,9 +51,7 @@ export class StoreController {
     @CurrentUser() user: UserResponseDto,
     @Body() storeCreationDto: StoreCreationDto,
   ): Promise<StoreResponseDto> {
-    const creationData = new StoreCreationEntityMapper().map(storeCreationDto, {
-      owner: user.id,
-    });
+    const creationData = new StoreCreationEntityMapper().map(storeCreationDto);
     const store = await this.storeService.create(creationData);
     return new StoreResponseMapper().map(store);
   }
@@ -69,7 +68,6 @@ export class StoreController {
   }
 
   @Delete(':id')
-  @RolesGuard('SUPER_ADMIN')
   @ApiOperation({ summary: 'Inactive a store' })
   @ApiResponse({ status: 200 })
   async softDelete(@Param('id') id: string): Promise<void> {

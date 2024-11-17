@@ -7,7 +7,7 @@ import { UserLoginDto } from '../../../shares/dtos';
 import TokenService from '../../common/auth/token.service';
 
 @Injectable()
-export default class UserService {
+export default class AdminUserService {
   constructor(
     private readonly em: EntityManager,
     private readonly tokenService: TokenService,
@@ -41,5 +41,9 @@ export default class UserService {
     await this.tokenService.blacklistPreviousToken(user.id);
     await this.tokenService.toInuse(user.id, tokenData.accessToken);
     return tokenData;
+  }
+
+  async findByEmail(email: string) {
+    return this.em.findOne(UserEntity, { email });
   }
 }

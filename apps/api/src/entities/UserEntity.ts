@@ -20,9 +20,8 @@ export class UserEntity extends BaseEntity<UserEntity> {
   @Unique()
   userName!: string;
 
-  @ApiProperty({ maxLength: 255 })
-  @Property({ length: 255 })
-  @Unique()
+  @ApiProperty({ maxLength: 255, required: false })
+  @Property({ length: 255, nullable: true })
   description?: string;
 
   @ApiProperty({ required: false, maxLength: 100 })
@@ -38,10 +37,14 @@ export class UserEntity extends BaseEntity<UserEntity> {
   password?: string;
 
   @ApiProperty({ required: true, maxLength: 100, uniqueItems: true })
-  @Property({ length: 100 })
+  @Property({ length: 100, nullable: false })
   @IsEmail()
   @Unique()
   email!: string;
+
+  @ApiProperty({ maxLength: 25, required: false })
+  @Property({ length: 100, nullable: true })
+  phone?: string;
 
   @ApiProperty({ required: true, maxLength: 100 })
   @Property({ default: false })

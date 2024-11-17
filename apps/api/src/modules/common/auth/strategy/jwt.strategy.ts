@@ -29,7 +29,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     }
     const token = authHeader.split(' ')[1];
     if (await this.tokenService.isInBlacklist(token)) {
-      throw new UnauthorizedException('Token has been blacklisted');
+      throw new UnauthorizedException(
+        'You are not allowed to access this resource',
+      );
     }
     const user = await this.userService.findByEmail(payload.email);
     if (!user?.isActive()) {

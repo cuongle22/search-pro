@@ -18,14 +18,14 @@ import { UserLoginDto } from '../../../shares/dtos';
 import { UserLoginResponseDto } from '../../../shares/dtos/user-login-response.dto';
 import { JwtGuard } from '../../common/auth/guard/jwt.guard';
 import TokenService from '../../common/auth/token.service';
-import UserService from './user.service';
+import AdminUserService from './admin-user.service';
 import { RolesGuard } from '~/decorators/role-guard.decorator';
 
-@ApiTags('Admin Users')
+@ApiTags('System')
 @Controller('admin/users')
-export class UserController {
+export class AdminUserController {
   constructor(
-    private readonly userService: UserService,
+    private readonly userService: AdminUserService,
     private readonly tokenService: TokenService,
   ) {}
 
