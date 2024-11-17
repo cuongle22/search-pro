@@ -60,6 +60,7 @@ export class UserController {
   async register(
     @Body() userCreationDto: UserCreationDto,
   ): Promise<UserResponseDto> {
+    //FIXME: using mapper instead
     const user = await this.userService.createUser(userCreationDto);
     return new UserResponseMapper().map(user);
   }
