@@ -6,14 +6,16 @@ import { StoreModule } from './modules/store/store.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { UserModule } from './modules/user/user.module';
 import { GeoRefModule } from './modules/share/geo-ref/geo-ref.module';
+import { ProductModule } from './modules/product/product.module';
 
 @Module({
   imports: [
     OrmModule,
+    GeoRefModule,
     AdminModule,
     UserModule,
+    ProductModule,
     StoreModule,
-    GeoRefModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [],

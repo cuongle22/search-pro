@@ -24,7 +24,7 @@ import { JwtGuard } from '../share/auth/guard';
 import { StoreService } from './store.service';
 import { RolesGuard } from '~/decorators/role-guard.decorator';
 
-@ApiTags('Store Owners')
+@ApiTags('Owner - Stores')
 @Controller('stores')
 @UseGuards(JwtGuard)
 @RolesGuard('STORE_OWNER')

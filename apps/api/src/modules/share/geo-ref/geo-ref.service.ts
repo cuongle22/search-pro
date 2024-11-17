@@ -10,6 +10,13 @@ export class GeoRefService {
     return await this.em.findOne(GeoRefEntity, { id });
   }
 
+  async findOneByZipCodeAndSteName(zipCode: string, steName: string) {
+    return await this.em.findOne(GeoRefEntity, {
+      zipCode,
+      steName,
+    });
+  }
+
   async findByCondition(
     condition: FilterQuery<GeoRefEntity>,
   ): Promise<GeoRefEntity[]> {

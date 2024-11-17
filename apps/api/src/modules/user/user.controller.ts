@@ -28,7 +28,7 @@ import { RolesGuard } from '~/decorators/role-guard.decorator';
 import TokenService from '../share/auth/token.service';
 import { Request } from 'express';
 
-@ApiTags('App Users')
+@ApiTags('App - Users')
 @Controller('users')
 @ApiBearerAuth()
 export class UserController {
