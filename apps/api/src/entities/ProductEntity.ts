@@ -9,8 +9,9 @@ import {
   Unique,
 } from '@mikro-orm/core';
 import { ProductStatus } from '~/share/consts/enums';
-import { ProductLocationEntity, StoreEntity } from '.';
+import { AttachmentEntity, ProductLocationEntity, StoreEntity } from '.';
 import { BaseEntity } from './BaseEntity';
+import { IsOptional } from 'class-validator';
 
 @Entity({ tableName: 'products' })
 @Unique({ properties: ['sku', 'store'] })
@@ -20,10 +21,11 @@ export class ProductEntity extends BaseEntity<ProductEntity> {
   sku!: string;
 
   @Property({ length: 255, nullable: true })
-  name?: string;
+  name!: string;
 
-  @Property({ type: types.json })
-  keywords!: string[];
+  @Property({ nullable: true, type: types.json })
+  @IsOptional()
+  keywords?: string[];
 
   @Property({ length: 1000, nullable: true })
   description?: string;
@@ -31,9 +33,13 @@ export class ProductEntity extends BaseEntity<ProductEntity> {
   @ManyToOne(() => StoreEntity)
   store!: StoreEntity;
 
+  @Enum({ items: () => ProductStatus, nullable: false })
+  @IsOptional()
+  status?: ProductStatus = ProductStatus.ACTIVE;
+
   @OneToMany(() => ProductLocationEntity, 'product')
   productLocations = new Collection<ProductLocationEntity>(this);
 
-  @Enum({ items: () => ProductStatus, nullable: false })
-  status?: ProductStatus = ProductStatus.ACTIVE;
+  @OneToMany(() => AttachmentEntity, 'product')
+  attachments = new Collection<AttachmentEntity>(this);
 }
