@@ -1,6 +1,13 @@
-import { Entity, Enum, ManyToOne, Property } from '@mikro-orm/core';
+import {
+  Collection,
+  Entity,
+  Enum,
+  ManyToOne,
+  OneToMany,
+  Property,
+} from '@mikro-orm/core';
 import { LocationStatus } from '~/share/consts/enums';
-import { GeoRefEntity, StoreEntity } from '.';
+import { AttachmentEntity, GeoRefEntity, StoreEntity } from '.';
 import { BaseEntity } from './BaseEntity';
 
 @Entity({ tableName: 'locations' })
@@ -25,4 +32,7 @@ export class LocationEntity extends BaseEntity<LocationEntity> {
 
   @ManyToOne(() => StoreEntity)
   store!: StoreEntity;
+
+  @OneToMany(() => AttachmentEntity, 'location')
+  attachments = new Collection<AttachmentEntity>(this);
 }

@@ -9,3 +9,6 @@ export * from './geo-ref-filter.dto';
 export * from './geo-ref-response.dto';
 export * from './product-response.dto';
 export * from './product-filter.dto';
+export * from './quote-response.dto';
+export * from './quote-filter.dto';
+export * from './quote-creation.dto';

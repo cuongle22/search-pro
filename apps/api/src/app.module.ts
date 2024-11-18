@@ -7,6 +7,7 @@ import { AdminModule } from './modules/admin/admin.module';
 import { UserModule } from './modules/user/user.module';
 import { GeoRefModule } from './modules/share/geo-ref/geo-ref.module';
 import { ProductModule } from './modules/product/product.module';
+import { QuoteModule } from './modules/quote/quote.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ProductModule } from './modules/product/product.module';
     AdminModule,
     UserModule,
     ProductModule,
+    QuoteModule,
     StoreModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],

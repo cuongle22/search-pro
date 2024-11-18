@@ -8,6 +8,7 @@ import {
 import { IsUrl } from 'class-validator';
 import { v4 as uuidv4 } from 'uuid';
 import { ProductEntity } from './ProductEntity';
+import { LocationEntity } from './LocationEntity';
 
 @Entity({ tableName: 'attachments' })
 export class AttachmentEntity {
@@ -28,5 +29,8 @@ export class AttachmentEntity {
   url!: string;
 
   @ManyToOne(() => ProductEntity)
-  product!: ProductEntity;
+  product?: ProductEntity;
+
+  @ManyToOne(() => LocationEntity)
+  location?: LocationEntity;
 }
