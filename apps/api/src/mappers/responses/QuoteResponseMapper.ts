@@ -28,6 +28,23 @@ export class QuoteResponseMapper extends BaseMapper<
         openTime: source.productLocation.location.openTime ?? 'N/A',
         closeTime: source.productLocation.location.closeTime ?? 'N/A',
       },
+      comments: [
+        {
+          id: source.productLocation.id,
+          outOfStock: false,
+          price: 10,
+          quantity: 2,
+          content: 'Contact store for more information',
+        },
+      ],
+      //TODO: fix this
+      // comments: source.comments.map((comment) => ({
+      //   id: comment.id,
+      //   outOfStock: comment.outOfStock ?? false,
+      //   price: comment.price ?? 10,
+      //   quantity: comment.quantity ?? 2,
+      //   content: comment.content,
+      // })),
     };
     return quoteDto;
   }

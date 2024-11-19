@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -25,6 +26,7 @@ import { UserResponseDto } from '~/share/dtos/user-response.dto';
 import { QuoteService } from './quote.service';
 import { RolesGuard } from '~/decorators/role-guard.decorator';
 import { JwtGuard } from '../share/auth/guard';
+import { QuoteStatus } from '~/share/consts/enums';
 
 @ApiTags('App - Quotes')
 @Controller('quotes')
@@ -71,6 +73,9 @@ export class QuoteController {
     const quote = await this.quoteService.findById(quoteId, user.id);
     if (!quote) {
       throw new NotFoundException('Product not found');
+    }
+    if (quote.status !== QuoteStatus.WAITING) {
+      throw new BadRequestException('Quote is waiting for response');
     }
     return new QuoteResponseMapper().map(quote);
   }

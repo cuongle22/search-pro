@@ -22,9 +22,6 @@ export enum ProductStatus {
 export enum QuoteStatus {
   WAITING = 'WAITING',
   RESPONDED = 'RESPONDED',
-  ACCEPTED = 'ACCEPTED',
-  REJECTED = 'REJECTED',
-  CLOSED = 'CLOSED',
 }
 
 export enum UserRole {

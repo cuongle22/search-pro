@@ -8,6 +8,10 @@ import { UserModule } from './modules/user/user.module';
 import { GeoRefModule } from './modules/share/geo-ref/geo-ref.module';
 import { ProductModule } from './modules/product/product.module';
 import { QuoteModule } from './modules/quote/quote.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join as pathJoin } from 'path';
+import { FileModule } from './modules/file/file.module';
+import { FileController } from './modules/file/file.controller';
 
 @Module({
   imports: [
@@ -18,9 +22,13 @@ import { QuoteModule } from './modules/quote/quote.module';
     ProductModule,
     QuoteModule,
     StoreModule,
+    FileModule,
     ConfigModule.forRoot({ isGlobal: true }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
   ],
-  controllers: [],
+  controllers: [FileController],
   providers: [
     {
       provide: APP_PIPE,
@@ -37,3 +45,6 @@ import { QuoteModule } from './modules/quote/quote.module';
   ],
 })
 export class AppModule {}
+function join(__dirname: string, arg1: string, arg2: string): string {
+  return pathJoin(__dirname, arg1, arg2);
+}

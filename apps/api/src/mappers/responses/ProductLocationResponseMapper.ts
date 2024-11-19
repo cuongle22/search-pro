@@ -23,12 +23,33 @@ export class ProductLocationResponseMapper extends BaseMapper<
         steName: source.location.geoRef.steName,
         price: source.price,
       },
-      attachments: source.product.attachments?.map((attachment) => ({
-        id: attachment.id,
-        name: attachment.name,
-        type: attachment.type,
-        url: attachment.url,
-      })),
+      //FIXME: This is a temporary solution, we should use a service to get the file
+      attachments: [
+        {
+          id: '1',
+          name: 'attachment1',
+          type: 'image',
+          url: '/files/iphone1.jpg',
+        },
+        {
+          id: '2',
+          name: 'attachment2',
+          type: 'image',
+          url: '/files/iphone2.png',
+        },
+        {
+          id: '2',
+          name: 'attachment2',
+          type: 'image',
+          url: '/files/iphone3.png',
+        },
+      ],
+      // attachments: source.product.attachments?.map((attachment) => ({
+      //   id: attachment.id,
+      //   name: attachment.name,
+      //   type: attachment.type,
+      //   url: attachment.url,
+      // })),
     };
     return productLocationDto;
   }

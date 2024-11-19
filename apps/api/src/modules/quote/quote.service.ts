@@ -34,10 +34,10 @@ export class QuoteService {
     const existingQuote = await this.em.findOne(QuoteEntity, {
       productLocation: data.productLocationId,
       requestor: requesterId,
-      status: QuoteStatus.CLOSED,
+      status: QuoteStatus.WAITING,
     });
     if (existingQuote) {
-      throw new BadRequestException('Quote already closed');
+      throw new BadRequestException('Quote is already created');
     }
 
     const productLocation = await this.em.findOne(

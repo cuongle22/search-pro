@@ -9,6 +9,7 @@ import { IsUrl } from 'class-validator';
 import { v4 as uuidv4 } from 'uuid';
 import { ProductEntity } from './ProductEntity';
 import { LocationEntity } from './LocationEntity';
+import { StoreEntity } from './StoreEntity';
 
 @Entity({ tableName: 'attachments' })
 export class AttachmentEntity {
@@ -28,9 +29,12 @@ export class AttachmentEntity {
   @IsUrl()
   url!: string;
 
-  @ManyToOne(() => ProductEntity)
+  @ManyToOne(() => ProductEntity, { nullable: true })
   product?: ProductEntity;
 
-  @ManyToOne(() => LocationEntity)
+  @ManyToOne(() => LocationEntity, { nullable: true })
   location?: LocationEntity;
+
+  @ManyToOne(() => StoreEntity, { nullable: true })
+  store?: StoreEntity;
 }

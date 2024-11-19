@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { StoreStatus } from '~/share/consts/enums';
+import { MinAttachmentDto } from './min.dto';
 
 export class MinOwnerDto {
   @ApiProperty({
@@ -62,4 +63,7 @@ export class StoreResponseDto {
 
   @ApiProperty({ type: [MinLocationDto] })
   locations?: MinLocationDto[];
+
+  @ApiProperty({ required: false, type: MinAttachmentDto })
+  banner!: MinAttachmentDto;
 }

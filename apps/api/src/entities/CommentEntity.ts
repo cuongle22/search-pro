@@ -10,6 +10,15 @@ export class CommentEntity extends BaseEntity<CommentEntity> {
   @ManyToOne(() => UserEntity)
   sender!: UserEntity;
 
-  @Property({ length: 1000 })
-  content!: string;
+  @Property({ nullable: true })
+  outOfStock?: boolean;
+
+  @Property({ length: 1000, nullable: true })
+  price?: number;
+
+  @Property({ length: 1000, nullable: true })
+  quantity?: number;
+
+  @Property({ length: 1000, nullable: true })
+  content?: string;
 }

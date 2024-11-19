@@ -27,6 +27,12 @@ export class StoreResponseMapper extends BaseMapper<
         userName: owner.userName,
         email: owner.email,
       })),
+      banner: {
+        id: '1',
+        name: 'banner',
+        type: 'image',
+        url: '/files/banner1.png', //FIXME: This is a temporary solution, we should use a service to get the file
+      },
     };
     return storeDto;
   }
