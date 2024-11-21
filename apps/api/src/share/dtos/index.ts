@@ -12,3 +12,4 @@ export * from './product-filter.dto';
 export * from './quote-response.dto';
 export * from './quote-filter.dto';
 export * from './quote-creation.dto';
+export * from './pagination.dto';

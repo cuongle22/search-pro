@@ -21,15 +21,9 @@ export class StoreCreationDto {
   @IsString()
   secondaryPhone?: string;
 
-  @ApiProperty({ example: 'store@example.com', required: false })
-  @IsOptional()
+  @ApiProperty({ example: 'store@example.com', required: true })
   @IsString()
-  email?: string;
-
-  @ApiProperty({ example: '123-456-7890', required: false })
-  @IsOptional()
-  @IsString()
-  phone?: string;
+  email!: string;
 
   @ApiProperty({ example: 'https://store.com', required: false })
   @IsOptional()

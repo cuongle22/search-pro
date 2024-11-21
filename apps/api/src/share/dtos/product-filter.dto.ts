@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
+import { PaginationDto } from './pagination.dto';
 
-export class ProductFilterDto {
+export class ProductFilterDto extends PaginationDto {
   @ApiProperty({ required: false, example: 'Ipad Air 4' })
   @IsOptional()
   @IsString()

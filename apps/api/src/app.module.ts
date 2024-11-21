@@ -1,17 +1,16 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';
-import { OrmModule } from './modules/share/orm/orm.module';
-import { StoreModule } from './modules/store/store.module';
-import { AdminModule } from './modules/admin/admin.module';
-import { UserModule } from './modules/user/user.module';
-import { GeoRefModule } from './modules/share/geo-ref/geo-ref.module';
-import { ProductModule } from './modules/product/product.module';
-import { QuoteModule } from './modules/quote/quote.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join as pathJoin } from 'path';
-import { FileModule } from './modules/file/file.module';
+import { AdminModule } from './modules/admin/admin.module';
 import { FileController } from './modules/file/file.controller';
+import { FileModule } from './modules/file/file.module';
+import { ProductModule } from './modules/product/product.module';
+import { QuoteModule } from './modules/quote/quote.module';
+import { GeoRefModule } from './modules/share/geo-ref/geo-ref.module';
+import { OrmModule } from './modules/share/orm/orm.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -21,7 +20,7 @@ import { FileController } from './modules/file/file.controller';
     UserModule,
     ProductModule,
     QuoteModule,
-    StoreModule,
+    // StoreModule,
     FileModule,
     ConfigModule.forRoot({ isGlobal: true }),
     ServeStaticModule.forRoot({

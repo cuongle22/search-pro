@@ -44,10 +44,19 @@ export class ProductService {
 
   async findByCondition(
     condition: FilterQuery<ProductLocationEntity>,
+    options: { page: number; limit: number },
     populate?: string[],
   ): Promise<ProductLocationEntity[]> {
-    return this.em.find(ProductLocationEntity, condition, {
-      populate: this.getPopulates(populate),
-    });
+    const { page, limit } = options;
+    const [productLocations] = await this.em.findAndCount(
+      ProductLocationEntity,
+      condition,
+      {
+        limit,
+        offset: (page - 1) * limit,
+        populate: this.getPopulates(populate),
+      },
+    );
+    return productLocations;
   }
 }

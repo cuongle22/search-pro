@@ -23,9 +23,15 @@ export class GeoRefController {
   async getGeoRefs(
     @Query() query: GeoRefFilterDto,
   ): Promise<GeoRefResponseDto[]> {
-    const condition: FilterQuery<GeoRefEntity> = {
-      ...query,
-    };
+    const condition: FilterQuery<GeoRefEntity> = {};
+
+    if (query.zipCode) {
+      condition.zipCode = { $like: `%${query.zipCode}%` };
+    }
+
+    if (query.steName) {
+      condition.steName = { $like: `%${query.steName}%` };
+    }
     const geoRefs = await this.geoRefService.findByCondition(condition);
     return new GeoRefResponseMapper().mapArray(geoRefs);
   }

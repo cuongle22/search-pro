@@ -9,7 +9,7 @@ import {
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProductLocationEntity } from '~/entities';
 import { ProductLocationResponseMapper } from '~/mappers/responses/ProductLocationResponseMapper';
-import { ProductFilterDto } from '~/share/dtos';
+import { PaginationResponseData, ProductFilterDto } from '~/share/dtos';
 import { ProductLocationResponseDto } from '~/share/dtos/product-location-response.dto';
 import { GeoRefService } from '../share/geo-ref/geo-ref.service';
 import { ProductService } from './product.service';
@@ -25,10 +25,13 @@ export class ProductController {
 
   @Get()
   @ApiOperation({ summary: 'List products' })
-  @ApiResponse({ status: 200, type: [ProductLocationResponseDto] })
+  @ApiResponse({
+    status: 200,
+    type: PaginationResponseData<ProductLocationResponseDto>,
+  })
   async searchProducts(
     @Query() query: ProductFilterDto,
-  ): Promise<ProductLocationResponseDto[]> {
+  ): Promise<PaginationResponseData<ProductLocationResponseDto>> {
     const geoRef = await this.geoRefService.findOneByZipCodeAndSteName(
       query.zipCode,
       query.steName,
@@ -43,9 +46,13 @@ export class ProductController {
         name: { $like: `%${query.productName}%` },
       };
     }
-    const productLocations =
-      await this.productService.findByCondition(conditions);
-    return new ProductLocationResponseMapper().mapArray(productLocations);
+    const { page = 1, limit = 10 } = query;
+    const productLocations = await this.productService.findByCondition(
+      conditions,
+      { page, limit },
+    );
+    const data = new ProductLocationResponseMapper().mapArray(productLocations);
+    return { data, page, limit };
   }
 
   @Get(':productLocationId')
