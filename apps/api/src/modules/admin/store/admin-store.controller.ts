@@ -12,6 +12,8 @@ import {
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
   ApiOperation,
   ApiResponse,
   ApiTags,
@@ -30,6 +32,7 @@ import { StoreResponseDto } from '~/share/dtos/store-response.dto';
 import { UserResponseDto } from '~/share/dtos/user-response.dto';
 import AdminUserService from '../user/admin-user.service';
 import { AdminStoreService } from './admin-store.service';
+// import * from 'multer';
 
 @ApiTags('System - Stores')
 @Controller('admin/stores')
@@ -65,12 +68,37 @@ export class AdminStoreController {
   }
 
   @Post()
+  @ApiConsumes('multipart/form-data')
   @ApiOperation({ summary: 'Create a new store' })
+  @ApiBody({ description: 'Create a new store', type: StoreCreationDto })
+  // @UseInterceptors(
+  //   FileInterceptor('file', {
+  //     dest: './uploads',
+  //     limits: { fileSize: 5 * 1024 * 1024 },
+  //     fileFilter: (req, file, cb) => {
+  //       const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+  //       if (allowedMimeTypes.includes(file.mimetype)) {
+  //         cb(null, true);
+  //       } else {
+  //         cb(
+  //           new BadRequestException(
+  //             'Invalid file type. Only JPEG, PNG, and GIF are allowed.',
+  //           ),
+  //           false,
+  //         );
+  //       }
+  //     },
+  //   }),
+  // )
   @ApiResponse({ status: 201, type: StoreResponseDto })
   async createStore(
     @CurrentUser() user: UserResponseDto,
     @Body() storeCreationDto: StoreCreationDto,
+    // @UploadedFile() file: Express.Multer.File,
   ): Promise<StoreResponseDto> {
+    // if (!file) {
+    //   throw new BadRequestException('Image is required');
+    // }
     const creationData = new StoreCreationEntityMapper().map(storeCreationDto);
     const store = await this.adminStoreService.create({
       ...creationData,

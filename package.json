@@ -12,11 +12,11 @@
     "test": "turbo run test"
   },
   "devDependencies": {
-    "turbo": "^2.2.3"
+    "turbo": "^2.5.4"
   },
   "resolutions": {
     "glob": "^11.0.0",
     "inflight": "^1.0.7"
   },
-  "packageManager": "pnpm@9.12.3"
+  "packageManager": "pnpm@10.11.0"
 }

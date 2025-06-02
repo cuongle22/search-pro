@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsOptional } from 'class-validator';
+// import { Express } from 'express';
 
 export class StoreCreationDto {
   @ApiProperty({ example: 'Store Name' })
@@ -29,4 +30,7 @@ export class StoreCreationDto {
   @IsOptional()
   @IsString()
   website?: string;
+
+  // @ApiProperty({ required: true })
+  // file!: Express.Multer.File;
 }
